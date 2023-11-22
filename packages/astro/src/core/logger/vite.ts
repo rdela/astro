@@ -16,6 +16,10 @@ const vitePageReloadMsg = /page reload (.*)( \(.*\))?/;
 const viteHmrUpdateMsg = /hmr update (.*)/;
 // capture "vite v5.0.0 building SSR bundle for production..." and "vite v5.0.0 building for production..." messages
 const viteBuildMsg = /vite.*building.*for production/;
+// capture "\n  Shortcuts" messages
+const viteShortcutTitleMsg = /.*Shortcuts.*/s;
+// capture "press * + enter to ..." messages
+const viteShortcutHelpMsg = /press.*\+ enter.*to.*/s;
 
 export function createViteLogger(
 	astroLogger: AstroLogger,
@@ -45,6 +49,16 @@ export function createViteLogger(
 			// Don't log Vite build messages
 			else if (viteBuildMsg.test(stripped)) {
 				// noop
+			}
+			// Don't log Vite shortcut title
+			else if (viteShortcutTitleMsg.test(stripped)) {
+				// noop
+			}
+			// Log shortcuts help messages without indent
+			else if (viteShortcutHelpMsg.test(stripped)) {
+				// Don't short clear screen shortcut
+				if (stripped.includes('c + enter')) return;
+				astroLogger.info('shortcut', msg.replace(/\s+press/, 'press'));
 			}
 			// Fallback
 			else {
