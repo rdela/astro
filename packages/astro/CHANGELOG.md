@@ -1,5 +1,11 @@
 # astro
 
+## 4.0.0-beta.3
+
+### Patch Changes
+
+- [#9230](https://github.com/withastro/astro/pull/9230) [`60cfa49e4`](https://github.com/withastro/astro/commit/60cfa49e445c926288612a6b1a30113ab988011c) Thanks [@FredKSchott](https://github.com/FredKSchott)! - Update the look and feel of the dev overlay
+
 ## 4.0.0-beta.2
 
 ### Major Changes
